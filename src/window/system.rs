@@ -23,3 +23,16 @@ pub fn generate_nodes(
         println!("{}, {}", i, current)
     }
 }
+
+fn spawn_base(
+    mut commands: Commands, 
+    mut mesh_assets: ResMut<Assets<Mesh>>
+) {
+    let sphere = mesh_assets.add(shape::UVSphere::default().into());
+
+    commands.spawn(PbrBundle {
+        mesh: sphere.clone(),
+        transform: Transform::from_translation(Vec3::new(2., 0., 2.)),
+        ..Default::default()
+    });
+}
