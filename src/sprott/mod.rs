@@ -1,3 +1,5 @@
+use bevy::prelude::Vec3;
+
 mod attractor;
 
 pub fn run() {
@@ -14,4 +16,9 @@ pub fn run() {
 
         println!("{}, {}, {}", x, y, z);
     }
+}
+
+pub fn gen_vec3(x: &f32, y: &f32, z: &f32) -> Vec3 {
+    let result = attractor::generate(&x, &y, &z);
+    return Vec3::new(result.0, result.1, result.2);
 }

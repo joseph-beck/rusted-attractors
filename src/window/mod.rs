@@ -1,19 +1,18 @@
 use bevy::prelude::*;
-use bevy_flycam::{ NoCameraPlayerPlugin, FlyCam};
+use bevy_flycam::NoCameraPlayerPlugin;
 
+mod setup;
+mod system;
 mod node;
 
 pub fn run() {
     App::new()
         .add_plugins(DefaultPlugins)
         .add_plugin(NoCameraPlayerPlugin)
-        .add_startup_system(setup_camera)
-        .add_system(spawn_sprott_base)
+        .insert_resource(setup::SETTINGS)
+        .add_startup_system(setup::camera)
+        .add_system(system::generate_nodes)
         .run();
-}
-
-fn setup_camera(mut commands: Commands) {
-    commands.spawn((Camera3dBundle::default(), FlyCam));
 }
 
 fn spawn_sprott_base(
