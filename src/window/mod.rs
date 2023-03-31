@@ -3,7 +3,6 @@ use bevy_flycam::NoCameraPlayerPlugin;
 
 mod setup;
 mod system;
-mod node;
 
 pub fn run() {
     App::new()
