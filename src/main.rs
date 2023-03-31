@@ -1,7 +1,9 @@
 mod lorenz;
 mod sprott;
+mod window;
 
 fn main() {
     //lorenz::run();
-    sprott::run();
+    //sprott::run();
+    window::run();
 }
