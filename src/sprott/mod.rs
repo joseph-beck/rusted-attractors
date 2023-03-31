@@ -1,9 +1,9 @@
 mod attractor;
 
 pub fn run() {
-    let mut x: f64 = 0.01;
-    let mut y: f64 = 0.;
-    let mut z: f64 = 0.;
+    let mut x: f32 = 0.01;
+    let mut y: f32 = 0.;
+    let mut z: f32 = 0.;
 
     loop {
         let result = attractor::generate(&x, &y, &z);

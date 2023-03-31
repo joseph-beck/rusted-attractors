@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy_flycam::{ NoCameraPlayerPlugin, FlyCam};
 
+mod node;
+
 pub fn run() {
     App::new()
         .add_plugins(DefaultPlugins)
