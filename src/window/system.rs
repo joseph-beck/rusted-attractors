@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use crate::lorenz;
+use crate::{lorenz, sprott};
 use crate::window::line;
 
 pub fn generate_nodes(
@@ -16,7 +16,7 @@ pub fn generate_nodes(
             ..Default::default()
         });
 
-        let delta = lorenz::gen_vec3(current);
+        let delta = lorenz::gen_vec3(&current);
 
         current.x += delta.x;
         current.y += delta.y;
@@ -25,17 +25,16 @@ pub fn generate_nodes(
     }
 }
 
-pub fn generate_line(
+pub fn draw_lines(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<line::Mat>>,
 ) {
+    let lines = generate_lines();
+
     commands.spawn(MaterialMeshBundle {
         mesh: meshes.add(Mesh::from(line::List {
-            lines: vec![
-                (Vec3::ZERO, Vec3::new(1.0, 1.0, 0.0)),
-                (Vec3::new(1.0, 1.0, 0.0), Vec3::new(1.0, 0.0, 0.0)),
-            ],
+            lines: lines,
         })),
         transform: Transform::from_xyz(-1.5, 0.0, 0.0),
         material: materials.add(line::Mat {
@@ -43,20 +42,27 @@ pub fn generate_line(
         }),
         ..default()
     });
+}
 
-    // Spawn a line strip that goes from point to point
-    commands.spawn(MaterialMeshBundle {
-        mesh: meshes.add(Mesh::from(line::Strip {
-            points: vec![
-                Vec3::ZERO,
-                Vec3::new(1.0, 1.0, 0.0),
-                Vec3::new(1.0, 0.0, 0.0),
-            ],
-        })),
-        transform: Transform::from_xyz(0.5, 0.0, 0.0),
-        material: materials.add(line::Mat { color: Color::BLUE }),
-        ..default()
-    });
+fn generate_lines() -> Vec<(Vec3, Vec3)> {
+    let mut lines = Vec::new();
+    let mut current: Vec3 = Vec3::new(0.01, 0., 0.);
 
-    println!("Lines made");
+    for _ in 0..10000 {
+        let delta = sprott::gen_vec3(&current);
+        let next = add_vec(&current, &delta);
+
+        lines.push((current, next));
+        current = next;
+    }
+
+    return lines;
+}
+
+fn add_vec(a: &Vec3, b: &Vec3) -> Vec3 {
+    return Vec3::new(
+        a.x + b.x,
+        a.y + b.y,
+        a.z + b.z
+    );
 }

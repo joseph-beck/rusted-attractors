@@ -18,7 +18,7 @@ pub fn run() {
     }
 }
 
-pub fn gen_vec3(vector: Vec3) -> Vec3 {
+pub fn gen_vec3(vector: &Vec3) -> Vec3 {
     let result = attractor::generate(&vector.x, &vector.y, &vector.z);
     return Vec3::new(result.0, result.1, result.2);
 }
