@@ -18,15 +18,11 @@ fn spawn_sprott_base(
     mut commands: Commands, 
     mut mesh_assets: ResMut<Assets<Mesh>>
 ) {
-    let mesh = mesh_assets.add(shape::Box::new(1., 1., 1.).into());
+    let sphere = mesh_assets.add(shape::UVSphere::default().into());
 
-    for x in -10..10 {
-        for z in -10..10 {
-            commands.spawn(PbrBundle {
-                mesh: mesh.clone(),
-                transform: Transform::from_translation(Vec3::new(x as f32 * 2., 0., z as f32 * 2.)),
-                ..Default::default()
-            });
-        }
-    }
+    commands.spawn(PbrBundle {
+        mesh: sphere.clone(),
+        transform: Transform::from_translation(Vec3::new(2., 0., 2.)),
+        ..Default::default()
+    });
 }
