@@ -13,6 +13,10 @@ pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
     return (dx, dy, dz);
 }
 
+pub fn start_point() -> Vec3 {
+    return Vec3::new(0.01, 0., 0.);
+}
+
 pub fn gen_vec3(vector: &Vec3) -> Vec3 {
     let result = generate(&vector.x, &vector.y, &vector.z);
     return Vec3::new(result.0, result.1, result.2);
