@@ -6,7 +6,7 @@ const C: f32 = 0.6;
 const D: f32 = 3.5;
 const E: f32 = 0.25;
 const F: f32 = 0.1;
-const DT: f32 = 0.01;
+const DT: f32 = 0.001;
 
 // something here is wrong
 

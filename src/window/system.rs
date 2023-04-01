@@ -23,10 +23,10 @@ pub fn draw_lines(
 
 fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
     let mut lines = Vec::new();
-    let mut current: Vec3 = attractors::thomas::start_point();
+    let mut current: Vec3 = attractors::dadras::start_point();
 
     for _ in 0..amount {
-        let delta = attractors::thomas::gen_vec3(&current);
+        let delta = attractors::dadras::gen_vec3(&current);
         let next = Vec3::new(
             current.x + delta.x,
             current.y + delta.y,
