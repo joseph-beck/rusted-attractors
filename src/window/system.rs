@@ -1,29 +1,6 @@
 use bevy::prelude::*;
-use crate::{lorenz, sprott};
+use crate::attractors;
 use crate::window::line;
-
-pub fn generate_nodes(
-    mut commands: Commands, 
-    mut mesh_assets: ResMut<Assets<Mesh>>
-) {
-    let mut current = Vec3::new(0.1, 0., 0.);
-    let sphere = mesh_assets.add(shape::UVSphere::default().into());
-    
-    for i in 0..50 {
-        commands.spawn(PbrBundle {
-            mesh: sphere.clone(),
-            transform: Transform::from_translation(Vec3::new(current.x * 150., current.y * 150., current.z * 150.)),
-            ..Default::default()
-        });
-
-        let delta = lorenz::gen_vec3(&current);
-
-        current.x += delta.x;
-        current.y += delta.y;
-        current.z += delta.z;
-        println!("{}, {}", i, current)
-    }
-}
 
 pub fn draw_lines(
     mut commands: Commands,
@@ -49,7 +26,7 @@ fn generate_lines() -> Vec<(Vec3, Vec3)> {
     let mut current: Vec3 = Vec3::new(0.01, 0., 0.);
 
     for _ in 0..10000 {
-        let delta = sprott::gen_vec3(&current);
+        let delta = attractors::sprott::gen_vec3(&current);
         let next = add_vec(&current, &delta);
 
         lines.push((current, next));

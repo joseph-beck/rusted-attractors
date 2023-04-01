@@ -1,9 +1,6 @@
-mod lorenz;
-mod sprott;
+mod attractors;
 mod window;
 
 fn main() {
-    //lorenz::run();
-    //sprott::run();
     window::run();
 }

@@ -1,3 +1,5 @@
+use bevy::prelude::Vec3;
+
 const A: f32 = 28.; 
 const B: f32 = 10.;
 const C: f32 = 2.67;
@@ -11,3 +13,7 @@ pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
     return (dx, dy, dz);
 }
 
+pub fn gen_vec3(vector: &Vec3) -> Vec3 {
+    let result = generate(&vector.x, &vector.y, &vector.z);
+    return Vec3::new(result.0, result.1, result.2);
+}
