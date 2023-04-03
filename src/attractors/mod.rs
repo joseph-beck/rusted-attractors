@@ -4,3 +4,4 @@ pub(crate) mod aizawa;
 pub(crate) mod chen;
 pub(crate) mod thomas;
 pub(crate) mod dadras;
+pub(crate) mod three_scroll;
