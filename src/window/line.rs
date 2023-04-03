@@ -18,7 +18,6 @@ pub struct Mat {
     pub color: Color,
 }
 
-
 impl Material for Mat {
     fn fragment_shader() -> ShaderRef {
         "shaders/line_material.wgsl".into()
