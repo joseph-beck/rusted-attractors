@@ -6,7 +6,7 @@ pub fn to_viewer(
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>
 ) {
-    if keyboard_input.just_pressed(KeyCode::G) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
         if app_state.0 != AppState::Viewer {
             next_app_state.set(AppState::Viewer);
         }
@@ -18,7 +18,7 @@ pub fn to_main_menu(
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>
 ) {
-    if keyboard_input.just_pressed(KeyCode::G) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
         if app_state.0 != AppState::MainMenu {
             next_app_state.set(AppState::MainMenu);
         }

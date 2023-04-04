@@ -1,17 +1,19 @@
-use bevy::app::AppExit;
-use bevy::prelude::*;
-
-use crate::AppState;
-use crate::user_interface::{
-    components::{
-        ViewButton,
-        QuitButton
+use bevy::{
+    prelude::*,
+    app::AppExit
+};
+use crate::{user_interface::{
+        button::components::{
+            ViewButton,
+            QuitButton
+        },
+        button::styles::{
+            NORMAL_BUTTON_COLOR,
+            HOVERED_BUTTON_COLOR,
+            CLICKED_BUTTON_COLOR
+        }
     },
-    main_menu::style::{
-        NORMAL_BUTTON_COLOR,
-        HOVERED_BUTTON_COLOR,
-        CLICKED_BUTTON_COLOR
-    }
+    AppState
 };
 
 pub fn with_view_button(

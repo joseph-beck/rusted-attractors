@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_flycam::NoCameraPlayerPlugin;
+//use bevy_flycam::NoCameraPlayerPlugin;
 use crate::{
     AppState, 
     user_interface::main_menu::MainMenuPlugin,
@@ -24,7 +24,7 @@ pub fn run() {
         ))
         .add_state::<AppState>()
         .add_plugin(MaterialPlugin::<line::Mat>::default())  
-        //.add_plugin(NoCameraPlayerPlugin)
+        //.add_plugin(NoCameraPlayerPlugin) // when using fly cam.
         .add_plugin(MainMenuPlugin)
         .insert_resource(setup::SETTINGS)
         .add_startup_system(setup::spawn_orbit_camera)

@@ -1,12 +1,10 @@
 use bevy::prelude::*;
 
-use crate::{
-    AppState
-};
+use crate::AppState;
 
 mod interactions;
 mod layout;
-mod style;
+mod styles;
 
 pub struct MainMenuPlugin;
 

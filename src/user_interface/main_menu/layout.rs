@@ -1,16 +1,19 @@
-use bevy::prelude::{
-    *
-};
+use bevy::prelude::*;
 use crate::{
-    user_interface::components::MainMenu,
-    user_interface::main_menu::style::{
-        NORMAL_BUTTON_COLOR,
-        BUTTON_STYLE,
-        MAIN_MENU_STYLE,
-        get_text_style
-    },
-    user_interface::components::ViewButton,
-    user_interface::components::QuitButton
+    user_interface::{
+        components::MainMenu,
+        main_menu::styles::{
+            MAIN_MENU_STYLE, get_text_style
+        },
+        button::{
+            components::{
+                ViewButton, QuitButton
+            },
+            styles::{
+                BUTTON_STYLE, NORMAL_BUTTON_COLOR
+            }
+        }
+    }
 };
 
 pub fn spawn_main_menu(
@@ -57,7 +60,7 @@ pub fn build_main_menu(
                     text: Text {
                         sections: vec![
                             TextSection::new(
-                                "View",
+                                "view",
                                 get_text_style(&assets)
                             )
                         ],
@@ -82,7 +85,7 @@ pub fn build_main_menu(
                     text: Text {
                         sections: vec![
                             TextSection::new(
-                                "Quit",
+                                "quit",
                                 get_text_style(&assets)
                             )
                         ],
