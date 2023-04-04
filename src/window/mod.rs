@@ -18,7 +18,7 @@ pub fn run() {
         .add_plugin(NoCameraPlayerPlugin)
         .add_plugin(MainMenuPlugin)
         .insert_resource(setup::SETTINGS)
-        .add_startup_system(setup::camera)
+        .add_startup_system(setup::spawn_camera)
         .add_startup_system(viewer::draw_lines)
         .add_system(transitions::to_viewer)
         .add_system(transitions::to_main_menu)
