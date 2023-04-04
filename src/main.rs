@@ -5,6 +5,7 @@ mod shapes;
 mod window;
 mod user_interface;
 mod viewer;
+mod camera;
 
 fn main() {
     window::run();
