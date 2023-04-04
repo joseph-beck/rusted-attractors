@@ -36,7 +36,7 @@ pub fn build_main_menu(
     let main_menu_ent = commands.spawn((
         NodeBundle {
             style: MAIN_MENU_STYLE,
-            //background_color: Color::RED.into(),
+            background_color: Color::NONE.into(),
             ..default()
         },
         MainMenu { },

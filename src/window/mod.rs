@@ -21,5 +21,6 @@ pub fn run() {
         .add_startup_system(setup::camera)
         .add_startup_system(viewer::draw_lines)
         .add_system(transitions::to_viewer)
+        .add_system(transitions::to_main_menu)
         .run();
 }

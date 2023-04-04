@@ -17,7 +17,7 @@ pub fn draw_lines(
         })),
         transform: Transform::from_xyz(-1.5, 0.0, 0.0),
         material: materials.add(line::Mat {
-            color: Color::GREEN,
+            color: Color::ORANGE_RED,
         }),
         ..default()
     });
