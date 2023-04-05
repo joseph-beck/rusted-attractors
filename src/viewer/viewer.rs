@@ -33,7 +33,7 @@ pub fn draw_lines(
 }
 
 fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
-    let attractor = Chen {
+    let attractor = Dadras {
         ..Default::default()
     };
     let mut lines = Vec::new();
