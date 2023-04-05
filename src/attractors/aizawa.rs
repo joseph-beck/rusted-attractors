@@ -1,28 +1,47 @@
 use bevy::prelude::Vec3;
 
-const A: f32 = 0.95; 
-const B: f32 = 0.7;
-const C: f32 = 0.6;
-const D: f32 = 3.5;
-const E: f32 = 0.25;
-const F: f32 = 0.1;
-const DT: f32 = 0.001;
+use super::Attractor;
 
-// something here is wrong
-
-pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
-    let dx: f32 = ((z - B) * x - (D * y)) * DT;
-    let dy: f32 = ((D * x) + ((z - B) * y)) * DT;
-    let dz: f32 = (C + (A * z) - (z.powf(3.)) / 3.) - ((x.powf(2.)) + (y.powf(2.))) * ((1. + (E * z)) + (F * z * x.powf(3.))) * DT;
-
-    return (dx, dy, dz);
+/// Aizawa attractor
+pub struct Aizawa {
+    pub a: f32,    
+    pub b: f32,    
+    pub c: f32,    
+    pub d: f32,    
+    pub e: f32,    
+    pub f: f32,    
+    pub dt: f32        
 }
 
-pub fn start_point() -> Vec3 {
-    return Vec3::new(0.1, 0., 0.);
+impl Default for Aizawa {
+    fn default() -> Self {
+        Aizawa {
+            a: 0.95, 
+            b: 0.7,
+            c: 0.6,
+            d: 3.5,
+            e: 0.25,
+            f: 0.1,
+            dt: 0.001
+        }
+    }
 }
 
-pub fn gen_vec3(vector: &Vec3) -> Vec3 {
-    let result = generate(&vector.x, &vector.y, &vector.z);
-    return Vec3::new(result.0, result.1, result.2);
+impl Attractor for Aizawa {
+    fn generate(
+        &self, 
+        x: &f32, 
+        y: &f32, 
+        z: &f32
+    ) -> (f32, f32, f32) {
+        let dx: f32 = ((z - self.b) * x - (self.d * y)) * self.dt;
+        let dy: f32 = ((self.d * x) + ((z - self.b) * y)) * self.dt;
+        let dz: f32 = (self.c + (self.a * z) - (z.powf(3.)) / 3.) - ((x.powf(2.)) + (y.powf(2.))) * ((1. + (self.e * z)) + (self.f * z * x.powf(3.))) * self.dt;
+
+        (dx, dy, dz)
+    }
+
+    fn start_point(&self) -> Vec3 {
+        Vec3::new(0.1, 0., 0.)
+    }
 }

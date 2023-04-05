@@ -1,8 +1,12 @@
+#![allow(unused_imports)]
+#![allow(dead_code)]
+
 use bevy::prelude::*;
 use crate::{ 
     attractors::{
         Attractor,
-        three_scroll::ThreeScroll
+        three_scroll::ThreeScroll,
+        thomas::Thomas
     }, 
     shapes, shapes::*
 };
@@ -27,7 +31,7 @@ pub fn draw_lines(
 }
 
 fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
-    let attractor = ThreeScroll {
+    let attractor = Thomas {
         ..Default::default()
     };
     let mut lines = Vec::new();

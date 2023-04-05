@@ -2,6 +2,7 @@ use bevy::prelude::Vec3;
 
 use super::Attractor;
 
+/// Sprott attractor
 pub struct Sprott {
     pub a: f32,
     pub b: f32,

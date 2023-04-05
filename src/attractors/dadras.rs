@@ -2,6 +2,7 @@ use bevy::prelude::Vec3;
 
 use super::Attractor;
 
+/// Dadras attractor
 pub struct Dadras {
     pub a: f32, 
     pub b: f32, 

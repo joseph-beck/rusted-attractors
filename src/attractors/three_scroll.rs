@@ -2,6 +2,7 @@ use bevy::prelude::Vec3;
 
 use super::Attractor;
 
+/// Three Scroll attractor
 pub struct ThreeScroll {
     pub a: f32,
     pub b: f32,

@@ -2,6 +2,7 @@ use bevy::prelude::Vec3;
 
 use super::Attractor;
 
+/// Lorenz attractor
 pub struct Lorenz {
     pub a: f32,
     pub b: f32,

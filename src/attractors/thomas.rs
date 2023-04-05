@@ -1,23 +1,37 @@
 use bevy::prelude::Vec3;
 
-const B: f32 = 0.208186;
-const DT: f32 = 0.01;
+use super::Attractor;
 
-// something here is wrong
-
-pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
-    let dx: f32 = (y.sin() - B * x) * DT;
-    let dy: f32 = (z.sin() - B * y) * DT;
-    let dz: f32 = (x.sin() - B * z) * DT;
-
-    return (dx, dy, dz);
+/// Thomas attractor
+pub struct Thomas {
+    pub a: f32,
+    pub dt: f32
 }
 
-pub fn start_point() -> Vec3 {
-    return Vec3::new(0.1, 0.2, 0.3);
+impl Default for Thomas {
+    fn default() -> Self {
+        Thomas {
+            a: 0.208186,
+            dt: 0.01
+        }
+    }
 }
 
-pub fn gen_vec3(vector: &Vec3) -> Vec3 {
-    let result = generate(&vector.x, &vector.y, &vector.z);
-    return Vec3::new(result.0, result.1, result.2);
+impl Attractor for Thomas {
+    fn generate(
+        &self, 
+        x: &f32, 
+        y: &f32, 
+        z: &f32
+    ) -> (f32, f32, f32) {
+        let dx: f32 = (y.sin() - self.a * x) * self.dt;
+        let dy: f32 = (z.sin() - self.a * y) * self.dt;
+        let dz: f32 = (x.sin() - self.a * z) * self.dt;
+
+        (dx, dy, dz)
+    }
+
+    fn start_point(&self) -> Vec3 {
+        Vec3::new(0.1, 0.2, 0.3)
+    }
 }

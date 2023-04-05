@@ -1,25 +1,43 @@
 use bevy::prelude::Vec3;
 
-const A: f32 = 5.; 
-const B: f32 = -10.;
-const C: f32 = -0.38;
-const DT: f32 = 0.01;
+use super::Attractor;
 
 // doesn't work for some reason
 
-pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
-    let dx: f32 = ((A * x) - (y * z)) * DT;
-    let dy: f32 = ((B * y) + (x * z)) * DT;
-    let dz: f32 = ((C * z) + ((x * y) / 3.)) * DT;
-
-    return (dx, dy, dz);
+/// Chen attractor
+pub struct Chen {
+    pub a: f32,
+    pub b: f32,
+    pub c: f32,
+    pub dt: f32,
 }
 
-pub fn start_point() -> Vec3 {
-    return Vec3::new(0.01, 0.01, 0.01);
+impl Default for Chen {
+    fn default() -> Self {
+        Chen {
+            a: 5.,
+            b: -10.,
+            c: -0.38,
+            dt: 0.001
+        }
+    }
 }
 
-pub fn gen_vec3(vector: &Vec3) -> Vec3 {
-    let result = generate(&vector.x, &vector.y, &vector.z);
-    return Vec3::new(result.0, result.1, result.2);
+impl Attractor for Chen {
+    fn generate(
+        &self, 
+        x: &f32, 
+        y: &f32, 
+        z: &f32
+    ) -> (f32, f32, f32) {
+        let dx: f32 = ((self.a * x) - (y * z)) * self.dt;
+        let dy: f32 = ((self.b * y) + (x * z)) * self.dt;
+        let dz: f32 = ((self.c * z) + ((x * y) / 3.)) * self.dt;
+
+        (dx, dy, dz)
+    }
+
+    fn start_point(&self) -> Vec3 {
+        Vec3::new(0.01, 0.01, 0.01)
+    }
 }
