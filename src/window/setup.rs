@@ -13,15 +13,18 @@ pub const SETTINGS: MovementSettings = MovementSettings {
 };
 
 pub fn spawn_flycam_camera(mut commands: Commands) {
+    let translation = Vec3::new(-2., 2.5, 5.);
+
     commands.spawn((Camera3dBundle {
-        transform: Transform::from_xyz(-2., 2.5, 5.).looking_at(Vec3::ZERO, Vec3::Y),
-        ..default() }, 
-        FlyCam
+        transform: Transform::from_translation(translation).looking_at(Vec3::ZERO, Vec3::Y),
+        ..default() 
+    }, 
+    FlyCam
     ));
 }
 
 pub fn spawn_orbit_camera(mut commands: Commands) {
-    let translation = Vec3::new(-2., 2.5, 5.);
+    let translation = Vec3::new(-5., 7., 7.);
     let radius = translation.length();
 
     commands.spawn((
