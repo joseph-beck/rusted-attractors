@@ -15,10 +15,10 @@ pub struct Chen {
 impl Default for Chen {
     fn default() -> Self {
         Chen {
-            a: 5.,
-            b: -10.,
-            c: -0.38,
-            dt: 0.001
+            a: 40.,
+            b: 28.,
+            c: 3.,
+            dt: 0.01
         }
     }
 }
@@ -30,14 +30,14 @@ impl Attractor for Chen {
         y: &f32, 
         z: &f32
     ) -> (f32, f32, f32) {
-        let dx: f32 = ((self.a * x) - (y * z)) * self.dt;
-        let dy: f32 = ((self.b * y) + (x * z)) * self.dt;
-        let dz: f32 = ((self.c * z) + ((x * y) / 3.)) * self.dt;
+        let dx: f32 = (self.a * (y - x)) * self.dt;
+        let dy: f32 = ((self.c - self.a) * x - (x * z) + (self.c * y)) * self.dt;
+        let dz: f32 = ((x * y) - (self.b * z)) * self.dt;
 
         (dx, dy, dz)
     }
 
     fn start_point(&self) -> Vec3 {
-        Vec3::new(0.01, 0.01, 0.01)
+        Vec3::new(-0.1, 0.5, -0.6)
     }
 }

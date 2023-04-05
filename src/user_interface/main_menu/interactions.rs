@@ -2,7 +2,8 @@ use bevy::{
     prelude::*,
     app::AppExit
 };
-use crate::{user_interface::{
+use crate::{
+    user_interface::{
         button::components::{
             ViewButton,
             QuitButton
