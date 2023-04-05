@@ -1,25 +1,44 @@
 use bevy::prelude::Vec3;
 
-const A: f32 = 40.;
-const B: f32 = 0.833;
-const C: f32 = 0.5;
-const D: f32 = 0.65;
-const E: f32 = 20.;
-const DT: f32 = 0.001;
+use super::Attractor;
 
-pub fn generate(x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
-    let dx: f32 = (A * (y - x) + C * x * z) * DT;
-    let dy: f32 = (E * y - x * z) * DT;
-    let dz: f32 = (B * z + x * y - D * x * x) * DT;
-
-    return (dx, dy, dz);
+pub struct ThreeScroll {
+    pub a: f32,
+    pub b: f32,
+    pub c: f32,
+    pub d: f32,
+    pub e: f32, 
+    pub dt: f32
 }
 
-pub fn start_point() -> Vec3 {
-    return Vec3::new(0.1, 1., -0.1);
+impl Default for ThreeScroll {
+    fn default() -> Self {
+        ThreeScroll {
+            a: 40.,
+            b: 0.833,
+            c: 0.5,
+            d: 0.65,
+            e: 20.,
+            dt: 0.001
+        }
+    }
 }
 
-pub fn gen_vec3(vector: &Vec3) -> Vec3 {
-    let result = generate(&vector.x, &vector.y, &vector.z);
-    return Vec3::new(result.0, result.1, result.2);
+impl Attractor for ThreeScroll {
+    fn generate(
+        &self, 
+        x: &f32, 
+        y: &f32,
+        z: &f32
+    ) -> (f32, f32, f32) {
+        let dx: f32 = (self.a * (y - x) + self.c * x * z) * self.dt;
+        let dy: f32 = (self.e * y - x * z) * self.dt;
+        let dz: f32 = (self.b * z + x * y - self.d * x * x) * self.dt;
+
+        (dx, dy, dz)
+    }
+
+    fn start_point(&self) -> Vec3 {
+        Vec3::new(0.1, 1., -0.1)
+    }
 }
