@@ -7,6 +7,8 @@ pub(crate) mod chen;
 pub(crate) mod thomas;
 pub(crate) mod dadras;
 pub(crate) mod three_scroll;
+pub(crate) mod halvorsen;
+pub(crate) mod four_wing;
 
 /// Attractor
 pub trait Attractor {

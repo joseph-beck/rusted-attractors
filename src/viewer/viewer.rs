@@ -8,7 +8,9 @@ use crate::{
         three_scroll::ThreeScroll,
         thomas::Thomas, 
         dadras::Dadras, 
-        chen::Chen
+        chen::Chen, 
+        halvorsen::Halvorsen,
+        four_wing::FourWing
     }, 
     shapes, shapes::*
 };
@@ -18,7 +20,7 @@ pub fn draw_lines(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<shapes::line::Mat>>,
 ) {
-    let lines = generate_lines(200_000);
+    let lines = generate_lines(100_000);
 
     commands.spawn(MaterialMeshBundle {
         mesh: meshes.add(Mesh::from(line::List {
@@ -33,7 +35,7 @@ pub fn draw_lines(
 }
 
 fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
-    let attractor = Dadras {
+    let attractor = FourWing {
         ..Default::default()
     };
     let mut lines = Vec::new();
