@@ -1,17 +1,29 @@
+use crate::AppState;
 use bevy::{
+    input::mouse::{MouseMotion, MouseWheel},
     prelude::*,
-    input::mouse::{
-        MouseWheel, MouseMotion
-    },
     render::camera::Projection,
-    window::{
-        Window, PrimaryWindow
+    window::{PrimaryWindow, Window},
+};
+
+/// Tags an entity as capable of panning and orbiting.
+#[derive(Component)]
+pub struct PanOrbitCamera {
+    /// The "focus point" to orbit around. It is automatically updated when panning the camera
+    pub focus: Vec3,
+    pub radius: f32,
+    pub upside_down: bool,
+}
+
+impl Default for PanOrbitCamera {
+    fn default() -> Self {
+        PanOrbitCamera {
+            focus: Vec3::ZERO,
+            radius: 5.0,
+            upside_down: false,
+        }
     }
-};
-use crate::{
-    camera::orbit_camera::PanOrbitCamera, 
-    AppState
-};
+}
 
 pub fn pan_orbit_camera(
     window_query: Query<&Window, With<PrimaryWindow>>,
@@ -63,7 +75,11 @@ pub fn pan_orbit_camera(
             let window = get_primary_window_size(&window_query);
             let delta_x = {
                 let delta = rotation_move.x / window.x * std::f32::consts::PI * 2.0;
-                if pan_orbit.upside_down { -delta } else { delta }
+                if pan_orbit.upside_down {
+                    -delta
+                } else {
+                    delta
+                }
             };
             let delta_y = rotation_move.y / window.y * std::f32::consts::PI;
             let yaw = Quat::from_rotation_y(-delta_x);
@@ -95,7 +111,8 @@ pub fn pan_orbit_camera(
             // parent = x and y rotation
             // child = z-offset
             let rot_matrix = Mat3::from_quat(transform.rotation);
-            transform.translation = pan_orbit.focus + rot_matrix.mul_vec3(Vec3::new(0.0, 0.0, pan_orbit.radius));
+            transform.translation =
+                pan_orbit.focus + rot_matrix.mul_vec3(Vec3::new(0.0, 0.0, pan_orbit.radius));
         }
     }
 

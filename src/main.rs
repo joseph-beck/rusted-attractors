@@ -1,11 +1,10 @@
 use bevy::prelude::*;
 
 mod attractors;
-mod shapes;
-mod window;
-mod user_interface;
-mod viewer;
 mod camera;
+mod shapes;
+mod ui;
+mod window;
 
 fn main() {
     window::run();

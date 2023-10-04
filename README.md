@@ -1,11 +1,10 @@
 # rusted-attractors
 
-made using bevy 0.10
+explore chaotic attractors in rust.
 
 ## dependencies
 
 - bevy 0.10
-- bevy flycam: https://github.com/NiklasEI
 
 ## thomas
 
