@@ -16,10 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install ALSA development package
-      run: sudo apt-get install -y libasound2-dev
-    - name: Set PKG_CONFIG_PATH
-      run: echo "PKG_CONFIG_PATH=/usr/lib/pkgconfig" >> $GITHUB_ENV
+    - name: Install ALSA and libudev development packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libasound2-dev libudev-dev
+        echo "PKG_CONFIG_PATH=/usr/lib/pkgconfig" >> $GITHUB_ENV
     - name: Build
       run: cargo build --verbose
     - name: Run tests
