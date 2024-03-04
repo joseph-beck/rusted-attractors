@@ -6,6 +6,21 @@ use bevy::{
     window::{PrimaryWindow, Window},
 };
 
+#[derive(Resource)]
+pub struct MovementSettings {
+    pub sensitivity: f32,
+    pub speed: f32,
+}
+
+impl Default for MovementSettings {
+    fn default() -> Self {
+        MovementSettings {
+            sensitivity: 0.00015,
+            speed: 10.,
+        }
+    }
+}
+
 /// Tags an entity as capable of panning and orbiting.
 #[derive(Component)]
 pub struct PanOrbitCamera {

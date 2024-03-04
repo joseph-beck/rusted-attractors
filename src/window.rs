@@ -2,28 +2,12 @@
 
 use crate::{
     attractors::{self, Attractor},
-    camera::{self, PanOrbitCamera},
-    shapes, AppState, ui::MainMenuPlugin,
+    camera::{self, MovementSettings, PanOrbitCamera},
+    shapes,
+    ui::MainMenuPlugin,
+    AppState,
 };
 use bevy::prelude::*;
-use bevy_flycam::{FlyCam, MovementSettings};
-
-pub const SETTINGS: MovementSettings = MovementSettings {
-    sensitivity: 0.00015,
-    speed: 10.,
-};
-
-pub fn spawn_flycam_camera(mut commands: Commands) {
-    let translation = Vec3::new(-2., 2.5, 5.);
-
-    commands.spawn((
-        Camera3dBundle {
-            transform: Transform::from_translation(translation).looking_at(Vec3::ZERO, Vec3::Y),
-            ..default()
-        },
-        FlyCam,
-    ));
-}
 
 pub fn spawn_orbit_camera(mut commands: Commands) {
     let translation = Vec3::new(-5., 7., 7.);
@@ -83,7 +67,7 @@ pub fn draw_lines(
 }
 
 fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
-    let attractor = attractors::FourWing {
+    let attractor = attractors::Rossler {
         ..Default::default()
     };
     let mut lines = Vec::new();
@@ -105,6 +89,10 @@ fn generate_lines(amount: i32) -> Vec<(Vec3, Vec3)> {
 }
 
 pub fn run() {
+    let settings: MovementSettings = MovementSettings {
+        ..Default::default()
+    };
+
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
@@ -117,7 +105,7 @@ pub fn run() {
         .add_plugin(MaterialPlugin::<shapes::Mat>::default())
         //.add_plugin(NoCameraPlayerPlugin) // when using fly cam.
         .add_plugin(MainMenuPlugin)
-        .insert_resource(SETTINGS)
+        .insert_resource(settings)
         .add_startup_system(spawn_orbit_camera)
         .add_startup_system(draw_lines)
         .add_system(to_viewer)
