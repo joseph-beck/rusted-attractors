@@ -345,3 +345,108 @@ impl Attractor for Rossler {
         Vec3::new(0.1, 0.1, 0.1)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_aizawa() {
+        let attractor = Aizawa::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_chen() {
+        let attractor = Chen::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_dadras() {
+        let attractor = FourWing::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() < 0.0001);
+        assert!((z - start_point.z).abs() < 0.0001);
+    }
+
+    #[test]
+    fn test_four_wing() {
+        let attractor = Halvorsen::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_halvorsen() {
+        let attractor = Halvorsen::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_lorenz() {
+        let attractor = Lorenz::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() < 0.0001);
+    }
+
+    #[test]
+    fn test_sprott() {
+        let attractor = Sprott::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() < 0.0001);
+    }
+
+    #[test]
+    fn test_thomas() {
+        let attractor = Thomas::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_three_scroll() {
+        let attractor = ThreeScroll::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+
+    #[test]
+    fn test_rossler() {
+        let attractor = Rossler::default();
+        let start_point = attractor.start_point();
+        let (x, y, z) = attractor.generate(&start_point.x, &start_point.y, &start_point.z);
+        assert!((x - start_point.x).abs() > 0.0001);
+        assert!((y - start_point.y).abs() > 0.0001);
+        assert!((z - start_point.z).abs() > 0.0001);
+    }
+}
