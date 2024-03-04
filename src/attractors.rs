@@ -313,3 +313,35 @@ impl Attractor for ThreeScroll {
         Vec3::new(0.1, 1., -0.1)
     }
 }
+
+pub struct Rossler {
+    pub a: f32,
+    pub b: f32,
+    pub c: f32,
+    pub dt: f32,
+}
+
+impl Default for Rossler {
+    fn default() -> Self {
+        Rossler {
+            a: 0.1,
+            b: 0.1,
+            c: 14.,
+            dt: 0.001,
+        }
+    }
+}
+
+impl Attractor for Rossler {
+    fn generate(&self, x: &f32, y: &f32, z: &f32) -> (f32, f32, f32) {
+        let dx: f32 = (-y - z) * self.dt;
+        let dy: f32 = (x + (self.a * y)) * self.dt;
+        let dz: f32 = (self.b + (z * (x - self.c))) * self.dt;
+
+        (dx, dy, dz)
+    }
+
+    fn start_point(&self) -> Vec3 {
+        Vec3::new(0.1, 0.1, 0.1)
+    }
+}
