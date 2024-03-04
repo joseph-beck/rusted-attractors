@@ -96,9 +96,11 @@ pub fn pan_orbit_camera(
                     delta
                 }
             };
+
             let delta_y = rotation_move.y / window.y * std::f32::consts::PI;
             let yaw = Quat::from_rotation_y(-delta_x);
             let pitch = Quat::from_rotation_x(-delta_y);
+
             transform.rotation = yaw * transform.rotation; // rotate around global y axis
             transform.rotation = transform.rotation * pitch; // rotate around local x axis
         } else if pan.length_squared() > 0.0 {
@@ -108,9 +110,11 @@ pub fn pan_orbit_camera(
             if let Projection::Perspective(projection) = projection {
                 pan *= Vec2::new(projection.fov * projection.aspect_ratio, projection.fov) / window;
             }
+
             // translate by local axes
             let right = transform.rotation * Vec3::X * -pan.x;
             let up = transform.rotation * Vec3::Y * pan.y;
+
             // make panning proportional to distance away from focus point
             let translation = (right + up) * pan_orbit.radius;
             pan_orbit.focus += translation;
